@@ -1,0 +1,3 @@
+[submodule "src/PhpMarkdown"]
+	path = src/PhpMarkdown
+	url = http://git.michelf.com/php-markdown
