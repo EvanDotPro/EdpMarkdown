@@ -4,7 +4,6 @@ namespace EdpMarkdown;
 
 use Zend\Module\Manager,
     Zend\Config\Config,
-    Zend\EventManager\StaticEventManager,
     Zend\Loader\AutoloaderFactory;
 
 class Module
