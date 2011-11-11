@@ -2,6 +2,12 @@ EdpMarkdown - ZF2 Markdown Module
 =================================
 Version 0.0.1 Created by [Evan Coury](http://blog.evan.pro/)
 
+**NOTE: THIS CURRENTLY DEPENDS ON A PATCH TO THE PLUGINBROKER THAT IS NOT MERGED
+INTO THE ZF2 MASTER. An alternative Service Locator strategy is being developed
+to replace the PluginBroker stuff in ZF2, so development of this module is
+currently on hold. You can still use this module, but it will require you
+manually inject the Markdown renderer into the view helper yourself somehow. See
+the DI configuration in this module for an idea of how this works.**
 
 Introduction
 ------------
