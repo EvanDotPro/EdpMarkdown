@@ -6,7 +6,7 @@ use Zend\Module\Consumer\AutoloaderProvider;
 
 class Module implements AutoloaderProvider
 {
-    protected function getAutoloaderConfig()
+    public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
