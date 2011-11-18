@@ -2,22 +2,13 @@
 
 namespace EdpMarkdown;
 
-use Zend\Module\Manager,
-    Zend\Config\Config,
-    Zend\Loader\AutoloaderFactory;
+use Zend\Module\Consumer\AutoloaderProvider;
 
-class Module
+class Module implements AutoloaderProvider
 {
-    protected $config;
-
-    public function init(Manager $moduleManager)
+    protected function getAutoloaderConfig()
     {
-        $this->initAutoloader();
-    }
-
-    protected function initAutoloader()
-    {
-        AutoloaderFactory::factory(array(
+        return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
@@ -26,11 +17,11 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
-        ));
+        );
     }
 
     public function getConfig($env = null)
     {
-        return new Config(include __DIR__ . '/configs/module.config.php');
+        return include __DIR__ . '/configs/module.config.php';
     }
 }
