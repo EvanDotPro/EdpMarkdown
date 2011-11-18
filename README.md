@@ -8,8 +8,9 @@ This ZF2 module simply adds [markdown](http://daringfireball.net/projects/markdo
 
 Installation
 ------------
-To install EdpMarkdown, simply clone this repository into your modules directory
-and enable it in your `configs/application.config.php` file. That's it!
+To install EdpMarkdown, simply recursively clone this repository (`git clone
+--recursive`) into your ZF2 modules directory and enable it in your
+`configs/application.config.php` file.  That's it!
 
 Usage
 -----
