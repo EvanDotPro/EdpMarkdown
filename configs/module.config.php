@@ -3,8 +3,8 @@ return array(
     'di' => array(
         'instance' => array(
             'alias' => array(
-                'markdown-parser' => 'MarkdownExtra_Parser',
-                //'markdown-parser' => 'Markdown_Parser',
+                'edpmarkdown_parser' => 'MarkdownExtra_Parser',
+                //'edpmarkdown_parser' => 'Markdown_Parser',
             ),
             'Zend\View\HelperLoader' => array(
                 'parameters' => array(
@@ -13,9 +13,19 @@ return array(
                     ),
                 ),
             ),
+            'Zend\View\PhpRenderer' => array(
+                'parameters' => array(
+                    'broker' => 'Zend\View\HelperBroker',
+                ),
+            ),
+            'Zend\View\HelperBroker' => array(
+                'parameters' => array(
+                    'loader' => 'Zend\View\HelperLoader',
+                ),
+            ),
             'EdpMarkdown\View\Helper\Markdown' => array(
                 'parameters' => array(
-                    'parser' => 'markdown-parser',
+                    'parser' => 'edpmarkdown_parser',
                 ),
             ),
         ),
