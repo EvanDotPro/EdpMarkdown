@@ -8,10 +8,19 @@ use Zend\EventManager\EventCollection,
 
 class Parser
 {
+    /**
+     * @var Markdown_Parser
+     */
     protected $engine;
 
+    /**
+     * @var Event
+     */
     protected $event;
 
+    /**
+     * @var EventManager
+     */
     protected $events;
 
     public function setEngine($engine)
@@ -22,7 +31,7 @@ class Parser
     /**
      * Set the event manager instance used by this module manager.
      *
-     * @param  EventCollection $events
+     * @param EventCollection $events
      * @return Manager
      */
     public function setEventManager(EventCollection $events)
@@ -48,7 +57,7 @@ class Parser
     /**
      * Get the module event
      *
-     * @return \Zend\EventManager\Event
+     * @return Event
      */
     public function getEvent()
     {
@@ -70,15 +79,34 @@ class Parser
         return $this;
     }
 
+    /**
+     * Parse Markdown string.
+     *
+     * This function triggers events to allow applying some filters.
+     *
+     * @param $string
+     * @return mixed
+     * @triggers parse.pre
+     * @triggers parse.post
+     */
     public function parse($string)
     {
         $event = $this->getEvent();
+        $event->setParam('__RESULT__', $string);
 
-        $event->setParam('string', $string);
+        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $event, function ($response) use ($event) {
+            // set returned value as __RESULT__ param, so that it can be processed by next filter
+            $event->setParam('__RESULT__', $response);
+        });
 
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $event);
-        $event->setParam('string', $this->engine->transform($event->getParam('string')));
-        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
-        return $event->getParam('string');
+        // do the transformation
+        $event->setParam('__RESULT__', $this->engine->transform($event->getParam('__RESULT__')));
+
+        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent(), function ($response) use ($event) {
+            // set returned value as __RESULT__ param, so that it can be processed by next filter
+            $event->setParam('__RESULT__', $response);
+        });
+
+        return $event->getParam('__RESULT__');
     }
 }
