@@ -3,8 +3,7 @@
 namespace EdpMarkdown;
 
 use Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\Event;
+    Zend\EventManager\EventManager;
 
 class Parser
 {
@@ -39,6 +38,7 @@ class Parser
         $this->events = $events;
         return $this;
     }
+
     /**
      * Retrieve the event manager
      *
@@ -84,7 +84,7 @@ class Parser
      *
      * This function triggers events to allow applying some filters.
      *
-     * @param $string
+     * @param string $string
      * @return mixed
      * @triggers parse.pre
      * @triggers parse.post
@@ -92,21 +92,18 @@ class Parser
     public function parse($string)
     {
         $event = $this->getEvent();
-        $event->setParam('__RESULT__', $string);
+        $event->setSource($string);
 
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $event, function ($response) use ($event) {
-            // set returned value as __RESULT__ param, so that it can be processed by next filter
-            $event->setParam('__RESULT__', $response);
-        });
+
+        // trigger parse.pre
+        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $event);
 
         // do the transformation
-        $event->setParam('__RESULT__', $this->engine->transform($event->getParam('__RESULT__')));
+        $event->setResult($this->engine->transform($event->getSource()));
 
-        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent(), function ($response) use ($event) {
-            // set returned value as __RESULT__ param, so that it can be processed by next filter
-            $event->setParam('__RESULT__', $response);
-        });
+        // trigger parse.post
+        $this->events()->trigger(__FUNCTION__ . '.post', $this, $event);
 
-        return $event->getParam('__RESULT__');
+        return $event->getResult();
     }
 }
