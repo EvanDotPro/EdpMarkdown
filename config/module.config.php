@@ -23,9 +23,14 @@ return array(
                     'loader' => 'Zend\View\HelperLoader',
                 ),
             ),
+            'EdpMarkdown\Parser' => array(
+                'parameters' => array(
+                    'engine' => 'edpmarkdown_parser',
+                ),
+            ),
             'EdpMarkdown\View\Helper\Markdown' => array(
                 'parameters' => array(
-                    'parser' => 'edpmarkdown_parser',
+                    'parser' => 'EdpMarkdown\Parser',
                 ),
             ),
         ),

@@ -1,16 +1,24 @@
 <?php
 namespace EdpMarkdown\View\Helper;
 
+use EdpMarkdown\Parser;
+
 use Zend\View\Helper\AbstractHelper;
 
 class Markdown extends AbstractHelper
 {
+    /**
+     * @var Parser
+     */
     protected $parser;
 
     public function __construct()
     {
     }
 
+    /**
+     * @param Parser $parser
+     */
     public function setParser($parser)
     {
         $this->parser = $parser;
@@ -25,7 +33,7 @@ class Markdown extends AbstractHelper
             return $this;
         }
 
-        return $this->parser->transform($string);
+        return $this->parser->parse($string);
     }
 
     public function start()
@@ -35,6 +43,6 @@ class Markdown extends AbstractHelper
 
     public function end()
     {
-        echo $this->parser->transform(ob_get_clean());
+        echo $this->parser->parse(ob_get_clean());
     }
 }
