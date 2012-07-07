@@ -10,7 +10,7 @@ Installation
 ------------
 To install EdpMarkdown, simply recursively clone this repository (`git clone
 --recursive`) into your ZF2 modules directory and enable it in your
-`configs/application.config.php` file.  That's it!
+`config/application.config.php` file.  That's it!
 
 Usage
 -----
