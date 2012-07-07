@@ -7,8 +7,11 @@ class Markdown extends AbstractHelper
 {
     protected $parser;
 
-    public function __construct()
+    public function __construct($parser = null)
     {
+        if ($parser) {
+            $this->setParser($parser);
+        }
     }
 
     public function setParser($parser)

@@ -2,10 +2,23 @@
 
 namespace EdpMarkdown;
 
-use Zend\Module\Consumer\AutoloaderProvider;
+use EdpMarkdown\View\Helper\Markdown as MarkdownHelper;
 
-class Module implements AutoloaderProvider
+class Module
 {
+    public function getViewHelperConfiguration()
+    {
+        return array(
+            'factories' => array(
+                'markdown' => function($helperPluginManager) {
+                    $serviceManager = $helperPluginManager->getServiceLocator();
+                    $markdownParser = $serviceManager->get('edpmarkdown_parser');
+                    return new MarkdownHelper($markdownParser);
+                }
+            ),
+        );
+    }
+
     public function getAutoloaderConfig()
     {
         return array(
@@ -20,7 +33,7 @@ class Module implements AutoloaderProvider
         );
     }
 
-    public function getConfig($env = null)
+    public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
