@@ -16,13 +16,19 @@ Usage
 -----
 With this module installed, using markdown in your view scripts is easy:
 
-    <?php $this->markdown()->start(); ?>
-    Hello, **this** is _markdown_!
-    <?php $this->markdown()->end(); ?>
+```php
+<?php $this->markdown()->start(); ?>
+Hello, **this** is _markdown_!
+<?php $this->markdown()->end(); ?>
+```
 
 or...
 
-    <?= $this->markdown('Hello, **this** is _markdown_!'); ?>
+```php
+<?= $this->markdown('Hello, **this** is _markdown_!'); ?>
+```
+
+**NOTE:** For security purposes, in a live application, you may want to run the output through an [HTML sanitizer](http://htmlpurifier.org/). (@PadraicB says so!)
 
 Configuration
 -------------
