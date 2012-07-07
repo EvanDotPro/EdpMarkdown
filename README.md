@@ -4,7 +4,7 @@ Version 0.0.1 Created by [Evan Coury](http://blog.evan.pro/)
 
 Introduction
 ------------
-This ZF2 module simply adds [markdown](http://daringfireball.net/projects/markdown/) support to your project. It utilizes the [PHP Markdown](http://michelf.com/projects/php-markdown/) library written by [Michel Fortin](http://michelf.com/) which is a PHP port of the original perl implementation by [John Gruber](http://daringfireball.net/). 
+This ZF2 module simply adds [markdown](http://daringfireball.net/projects/markdown/) support to your project. It utilizes the [PHP Markdown](http://michelf.com/projects/php-markdown/) library written by [Michel Fortin](http://michelf.com/) which is a PHP port of the original perl implementation by [John Gruber](http://daringfireball.net/).
 
 Installation
 ------------
@@ -26,6 +26,18 @@ or...
 
 Configuration
 -------------
-By default, this module uses the ["Markdown Extra"](http://michelf.com/projects/php-markdown/extra/) parser. If you'd like to switch it to just use the normal markdown parser, you can add the following DI alias to your config:
+By default, this module uses the ["Markdown Extra"](http://michelf.com/projects/php-markdown/extra/)
+parser. If you'd like to switch it to just use the normal markdown parser, you
+can simply override the `edpmarkdown_parser` invokable in the service manager
+config to the `Markdown_Parser` class:
 
-    'markdown-parser' => 'Markdown_Parser'
+```php
+<?php
+return array(
+    'service_manager' => array(
+        'invokables' => array(
+            'edpmarkdown_parser' => 'Markdown_Parser'
+        )
+    )
+);
+```
