@@ -28,7 +28,7 @@ or...
 <?= $this->markdown('Hello, **this** is _Markdown_!'); ?>
 ```
 
-**NOTE:** For security purposes, the output **SHOULD** be [sanitised](http://htmlpurifier.org/) if the Markdown is from an untrusted source. ([@padraic](https://github.com/padraic) says so!) See the [Markdown documentation on inline HTML](http://daringfireball.net/projects/markdown/syntax#html) to understand why this is necessary.
+**NOTE:** For security purposes, the output **SHOULD** be [sanitized](http://htmlpurifier.org/) if the Markdown is from an untrusted source. ([@padraic](https://github.com/padraic) says so!) See the [Markdown documentation on inline HTML](http://daringfireball.net/projects/markdown/syntax#html) to understand why this is necessary.
 
 Configuration
 -------------
