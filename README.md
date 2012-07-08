@@ -56,9 +56,10 @@ to source Markdown code (`parse.pre`), or to resulting HTML (`parse.post`).
 This simple example changes all unordererd lists to ordered:
 
 ```php
-$handler = $events->attach('EdpMarkdown\Parser', 'parse.post', function($e) {
 
-    $string = $e->getParam('__RESULT__');
+$handler = $events->attach('EdpMarkdown\Parser', 'parse.post', function(\EdpMarkdown\Event $e) {
+
+    $string = $e->getResult;
 
     // replace unordered list with ordered
     $string = str_replace(array('<ul>', '</ul>'), array('<ol>', '</ol>'), $string);
@@ -66,4 +67,3 @@ $handler = $events->attach('EdpMarkdown\Parser', 'parse.post', function($e) {
     return $string;
 });
 ```
-
