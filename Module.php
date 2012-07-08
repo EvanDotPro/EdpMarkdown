@@ -23,11 +23,11 @@ class Module
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                array(
+                    'EdpMarkdown\View\Helper\Markdown' => __DIR__ . '/src/EdpMarkdown/View/Helper/Markdown.php',
+                    'Textile'                          => __DIR__ . '/src/PhpMarkdown/markdown.php',
+                    'Markdown_Parser'                  => __DIR__ . '/src/PhpMarkdown/markdown.php',
+                    'MarkdownExtra_Parser'             => __DIR__ . '/src/PhpMarkdown/markdown.php',
                 ),
             ),
         );
@@ -35,6 +35,12 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return array(
+            'service_manager' => array(
+                'invokables' => array(
+                    'edpmarkdown_parser' => 'MarkdownExtra_Parser',
+                ),
+            ),
+        );
     }
 }
