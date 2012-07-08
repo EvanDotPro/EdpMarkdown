@@ -1,76 +1,16 @@
 <?php
-
 namespace EdpMarkdown;
 
-use Zend\View\Helper\AbstractHelper;
-
-class Module extends AbstractHelper
+class Module extends \Zend\View\Helper\AbstractHelper
 {
     public function getViewHelperConfiguration()
     {
-        $self = $this;
-        return array(
-            'factories' => array(
-                'markdown' => function($helperPluginManager) use ($self) {
-                    $serviceManager = $helperPluginManager->getServiceLocator();
-                    return $self->setParser($serviceManager->get('edpmarkdown_parser'));
-                }
-            ),
-        );
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                array(
-                    'Textile'              => __DIR__ . '/src/PhpMarkdown/markdown.php',
-                    'Markdown_Parser'      => __DIR__ . '/src/PhpMarkdown/markdown.php',
-                    'MarkdownExtra_Parser' => __DIR__ . '/src/PhpMarkdown/markdown.php',
-                ),
-            ),
-        );
-    }
-
-    public function getConfig()
-    {
-        return array(
-            'service_manager' => array(
-                'invokables' => array(
-                    'edpmarkdown_parser' => 'MarkdownExtra_Parser',
-                ),
-            ),
-        );
-    }
-
-    /**
-     * View helper stuff
-     */
-    public function setParser($parser)
-    {
-        $this->parser = $parser;
-        return $this;
+        return array('services' => array('markdown' => $this));
     }
 
     public function __invoke($string = null)
     {
-        if (null === $this->parser) {
-            return $string;
-        }
-        if (null === $string) {
-            return $this;
-        }
-
-        return $this->parser->transform($string);
-    }
-
-    public function start()
-    {
-        ob_start();
-    }
-
-    public function end()
-    {
-        echo $this->parser->transform(ob_get_clean());
+        require_once __DIR__ . '/php-markdown/markdown.php';
+        return Markdown($string);
     }
 }
