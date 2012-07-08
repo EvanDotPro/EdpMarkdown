@@ -57,7 +57,7 @@ class Module extends AbstractHelper
         if (null === $this->parser) {
             return $string;
         }
-        if ($string === null) {
+        if (null === $string) {
             return $this;
         }
 
