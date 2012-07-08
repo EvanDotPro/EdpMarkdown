@@ -24,9 +24,9 @@ class Module extends AbstractHelper
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 array(
-                    'Textile'                          => __DIR__ . '/src/PhpMarkdown/markdown.php',
-                    'Markdown_Parser'                  => __DIR__ . '/src/PhpMarkdown/markdown.php',
-                    'MarkdownExtra_Parser'             => __DIR__ . '/src/PhpMarkdown/markdown.php',
+                    'Textile'              => __DIR__ . '/src/PhpMarkdown/markdown.php',
+                    'Markdown_Parser'      => __DIR__ . '/src/PhpMarkdown/markdown.php',
+                    'MarkdownExtra_Parser' => __DIR__ . '/src/PhpMarkdown/markdown.php',
                 ),
             ),
         );
