@@ -2,18 +2,18 @@
 
 namespace EdpMarkdown;
 
-use EdpMarkdown\View\Helper\Markdown as MarkdownHelper;
+use Zend\View\Helper\AbstractHelper;
 
-class Module
+class Module extends AbstractHelper
 {
     public function getViewHelperConfiguration()
     {
+        $self = $this;
         return array(
             'factories' => array(
-                'markdown' => function($helperPluginManager) {
+                'markdown' => function($helperPluginManager) use ($self) {
                     $serviceManager = $helperPluginManager->getServiceLocator();
-                    $markdownParser = $serviceManager->get('edpmarkdown_parser');
-                    return new MarkdownHelper($markdownParser);
+                    return $self->setParser($serviceManager->get('edpmarkdown_parser'));
                 }
             ),
         );
@@ -24,7 +24,6 @@ class Module
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 array(
-                    'EdpMarkdown\View\Helper\Markdown' => __DIR__ . '/src/EdpMarkdown/View/Helper/Markdown.php',
                     'Textile'                          => __DIR__ . '/src/PhpMarkdown/markdown.php',
                     'Markdown_Parser'                  => __DIR__ . '/src/PhpMarkdown/markdown.php',
                     'MarkdownExtra_Parser'             => __DIR__ . '/src/PhpMarkdown/markdown.php',
@@ -42,5 +41,36 @@ class Module
                 ),
             ),
         );
+    }
+
+    /**
+     * View helper stuff
+     */
+    public function setParser($parser)
+    {
+        $this->parser = $parser;
+        return $this;
+    }
+
+    public function __invoke($string = null)
+    {
+        if (null === $this->parser) {
+            return $string;
+        }
+        if ($string === null) {
+            return $this;
+        }
+
+        return $this->parser->transform($string);
+    }
+
+    public function start()
+    {
+        ob_start();
+    }
+
+    public function end()
+    {
+        echo $this->parser->transform(ob_get_clean());
     }
 }
