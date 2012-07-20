@@ -3,7 +3,7 @@ namespace EdpMarkdown;
 
 class Module extends \Zend\View\Helper\AbstractHelper
 {
-    public function getViewHelperConfiguration()
+    public function getViewHelperConfig()
     {
         return array('services' => array('markdown' => $this));
     }
