@@ -34,3 +34,9 @@ to check for. An easy place to do this would be in a config file such as
 <?php
 define('MARKDOWN_PARSER_CLASS',  'Markdown_Parser');
 ```
+
+## License
+
+EdpMarkdown is released under the New BSD license. See the included LICENSE file.
+
+PHP Markdown is available under the New BSD or the GNU GPL v2.
