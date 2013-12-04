@@ -1,0 +1,27 @@
+{
+    "name": "evandotpro/edp-markdown",
+    "description": "A minimalist ZF2 module for adding markdown support to Zend Framework 2 projects",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "zendframework",
+        "markdown"
+    ],
+    "homepage": "https://github.com/EvanDotPro/EdpMarkdown",
+    "authors": [
+        {
+            "name": "Evan Coury",
+            "email": "me@evancoury.com",
+            "homepage": "http://blog.evan.pro/"
+        }
+    ],
+    "require": {
+        "zendframework/zend-view": "2.3.*",
+        "michelf/php-markdown": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}
