@@ -10,7 +10,7 @@ class Module extends \Zend\View\Helper\AbstractHelper
 
     public function __invoke($string = null)
     {
-        require_once __DIR__ . '/php-markdown/markdown.php';
-        return Markdown($string);
+        if (!class_exists('Michelf\Markdown')) require_once __DIR__ . '/php-markdown/Michelf/Markdown.inc.php';
+        return \Michelf\Markdown::defaultTransform($string);
     }
 }
