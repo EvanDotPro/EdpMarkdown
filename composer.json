@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "zendframework/zend-view": "2.3.*",
-        "michelf/php-markdown": "*"
+        "zendframework/zend-view": "~2.*",
+        "michelf/php-markdown": "~1.4"
     },
     "autoload": {
         "classmap": [
