@@ -24,16 +24,7 @@ With this module installed, using Markdown in your view scripts is easy:
 
 ## Configuration
 
-By default, this module uses the ["Markdown Extra"](http://michelf.com/projects/php-markdown/extra/)
-parser. If you'd like to switch it to just use the normal markdown parser, you
-can simply define the `MARKDOWN_PARSER_CLASS`, which PHP Markdown is configured
-to check for. An easy place to do this would be in a config file such as
-`./config/autoload/global.php`.
-
-```php
-<?php
-define('MARKDOWN_PARSER_CLASS',  'Markdown_Parser');
-```
+TODO: Create simple way to toggle to the 'extra' parser.
 
 ## License
 
