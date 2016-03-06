@@ -17,14 +17,29 @@ To install EdpMarkdown, simply recursively clone this repository (`git clone
 With this module installed, using Markdown in your view scripts is easy:
 
 ```php
-<?= $this->markdown('Hello, **this** is _Markdown_!'); ?>
+<?php echo $this->markdown('Hello, **this** is _Markdown_!'); ?>
+```
+
+You may also use MarkdownExtra with this module:
+
+```php
+<?php echo $this->markdown('Hello, **this** is <strong>MarkdownExtra</strong>!', \EdpMarkdown\Module::MARKDOWN_EXTRA); ?>
+```
+
+or simpler:
+
+```php
+<?php echo $this->markdown('Hello, **this** is <strong>MarkdownExtra</strong>!', 'extra'); ?>
+```
+
+If you want all your calls to the markdown-helper to use MarkdownExtra, you can setup the default Markdown-type as follows:
+
+```php
+// For example in your onBootsrap-method:
+\EdpMarkdown\Module::setDefaultType(\EdpMarkdown\Module::MARKDOWN_EXTRA);
 ```
 
 **NOTE:** For security purposes, the output **SHOULD** be [sanitized](http://htmlpurifier.org/) if the Markdown is from an untrusted source. ([@padraic](https://github.com/padraic) says so!) See the [Markdown documentation on inline HTML](http://daringfireball.net/projects/markdown/syntax#html) to understand why this is necessary.
-
-## Configuration
-
-TODO: Create simple way to toggle to the 'extra' parser.
 
 ## License
 
